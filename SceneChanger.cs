@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Puzzle_Hustle_Winter_Edition
+{
+    class SceneChanger
+    {
+        //storing the scenes in an enum in order to switch between them easily
+        public enum Scenes
+        {
+            Menu,
+            Map,
+            Game,
+            Result
+        }
+        //storing public variables because that are being used by other classes
+        public Scenes currentScene;
+        public int currentLevel;
+
+        //
+        public void ChangeScene(Scenes newScene)
+        {
+            currentScene = newScene;
+        }
+    }
+}
