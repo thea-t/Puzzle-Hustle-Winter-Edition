@@ -20,7 +20,7 @@ namespace Puzzle_Hustle_Winter_Edition
         public Scenes currentScene;
         public int currentLevel;
 
-        //
+        //function that changes the scene
         public void ChangeScene(Scenes newScene)
         {
             currentScene = newScene;

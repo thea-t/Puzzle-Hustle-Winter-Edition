@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Content/art/Background3.png</SourceFile>
+  <SourceFile>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/Background3.png</SourceFile>
   <SourceTime>2020-11-16T21:24:09.2517369+00:00</SourceTime>
-  <DestFile>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Content/bin/DesktopGL/Content/art/Background3.xnb</DestFile>
-  <DestTime>2020-11-22T16:22:50.8899326+00:00</DestTime>
+  <DestFile>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/bin/DesktopGL/Content/art/Background3.xnb</DestFile>
+  <DestTime>2020-12-07T03:53:36.9587189+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-09-23T22:55:52+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

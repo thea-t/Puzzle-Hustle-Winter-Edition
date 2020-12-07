@@ -7,9 +7,9 @@ namespace Puzzle_Hustle_Winter_Edition
     //how to draw textures from other classes https://community.monogame.net/t/drawing-from-a-new-class-is-not-working/11878/5
     class ScenesContent : DrawableGameComponent
     {
-        
 
-        //creating instance variables of 2D textures that will be used to load and draw the images later on
+
+        //creating texture2D variable that will be used to load and draw the images later on
         Texture2D m_BackgroundImage;
         Texture2D m_Background2Image;
         Texture2D m_Background3Image;
@@ -24,6 +24,7 @@ namespace Puzzle_Hustle_Winter_Edition
         //MapLevel m_MapLevel3;
         //MapLevel m_MapLevel4;
         //MapLevel m_MapLevel5;
+
         //creating an array of map levels https://stackoverflow.com/questions/3301678/how-to-declare-an-array-of-objects-in-c-sharp
         MapLevel[] m_Levels = new MapLevel[5];
 
@@ -64,6 +65,8 @@ namespace Puzzle_Hustle_Winter_Edition
         //m_Level3 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(300,100), 3, true);
         //m_Level4 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(400,100), 4, true);
         //m_Level5 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(500,100), 5, true);
+
+        //creating instances of MapLevel and calling their constuctors 
         m_Levels[0] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(100, 100), 1, false);
         m_Levels[1] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(200, 100), 2, true);
         m_Levels[2] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(300, 100), 3, true);
@@ -76,7 +79,7 @@ namespace Puzzle_Hustle_Winter_Edition
         {
            
             m_SpriteBatch.Begin();
-            //Menu scene
+            //menu scene
             if (m_SceneChanger.currentScene == SceneChanger.Scenes.Menu)
             {
                 m_SpriteBatch.Draw(m_BackgroundImage, new Vector2(0, 0));
@@ -84,7 +87,7 @@ namespace Puzzle_Hustle_Winter_Edition
                 m_SpriteBatch.DrawString(m_Font, "Hustle", new Vector2(400, 200), Color.DarkRed);
                 m_SpriteBatch.Draw(m_PlayButtonImage, m_PlayButtonPosition);
             }
-            //Map scene
+            //map scene
             else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Map)
             {
                 m_SpriteBatch.Draw(m_Background2Image, new Vector2(0, 0));
@@ -94,13 +97,16 @@ namespace Puzzle_Hustle_Winter_Edition
                 //m_Level3.Draw(m_SpriteBatch, m_Font);
                 //m_Level4.Draw(m_SpriteBatch, m_Font);
                 //m_Level5.Draw(m_SpriteBatch, m_Font);
-                for (int i = 0; i < m_Levels.Length; i++)
+
+                //drawing all the map level buttons 
+                for (int i = 0; i < m_Letvels.Lengh; i++)
                 {
                     m_Levels[i].Draw(m_SpriteBatch, m_Font);
 
                 }
 
             }
+            //game scene
             else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
             {
                 m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
@@ -109,6 +115,7 @@ namespace Puzzle_Hustle_Winter_Edition
                 //convert int to string http://zetcode.com/csharp/inttostring/
                 m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), levelTextPosition, Color.White, 0, levelTextPosition, 0.3f, SpriteEffects.None, 1);
             }
+            //result scene
             else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Result)
             {
                 m_SpriteBatch.Draw(m_Background5Image, new Vector2(0, 0));
@@ -142,7 +149,7 @@ namespace Puzzle_Hustle_Winter_Edition
                         }
                     }
                 }
-
+                //cheking which is the currently active scene (if it is map)
                 else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Map)
                 {
                     //m_Level1.Update(newState,m_SceneChanger);
@@ -150,6 +157,8 @@ namespace Puzzle_Hustle_Winter_Edition
                     //m_Level3.Update(newState, m_SceneChanger);
                     //m_Level4.Update(newState, m_SceneChanger);
                     //m_Level5.Update(newState, m_SceneChanger);
+
+                    //calling the update function on each level
                     for (int i = 0; i < m_Levels.Length; i++)
                     {
                         m_Levels[i].Update(currentState, m_SceneChanger);
