@@ -39,7 +39,7 @@ namespace Puzzle_Hustle_Winter_Edition
         // storing the previous mouse state to make sure that the button was released before, and pressed now
         private MouseState oldState;
 
-        public ScenesContent(Game game) : base(game) 
+        public ScenesContent(Game game) : base(game)
         {
         }
 
@@ -99,7 +99,7 @@ namespace Puzzle_Hustle_Winter_Edition
                 //m_Level5.Draw(m_SpriteBatch, m_Font);
 
                 //drawing all the map level buttons 
-                for (int i = 0; i < m_Letvels.Lengh; i++)
+                for (int i = 0; i < m_Levels.Length; i++)
                 {
                     m_Levels[i].Draw(m_SpriteBatch, m_Font);
 
@@ -152,12 +152,6 @@ namespace Puzzle_Hustle_Winter_Edition
                 //cheking which is the currently active scene (if it is map)
                 else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Map)
                 {
-                    //m_Level1.Update(newState,m_SceneChanger);
-                    //m_Level2.Update(newState, m_SceneChanger);
-                    //m_Level3.Update(newState, m_SceneChanger);
-                    //m_Level4.Update(newState, m_SceneChanger);
-                    //m_Level5.Update(newState, m_SceneChanger);
-
                     //calling the update function on each level
                     for (int i = 0; i < m_Levels.Length; i++)
                     {

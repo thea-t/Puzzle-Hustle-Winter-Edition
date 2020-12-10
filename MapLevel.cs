@@ -13,7 +13,8 @@ namespace Puzzle_Hustle_Winter_Edition
     class MapLevel
     {
         //creating texture2D variable that will be used to load and draw the images later on
-        Texture2D m_Texture;
+        Texture2D m_ButtonTexture;
+        Texture2D m_GridTexture;
         Texture2D m_LockedTexture;
 
         //creating vector2 that will be used to place the images in certain positions later on
@@ -23,6 +24,9 @@ namespace Puzzle_Hustle_Winter_Edition
         //storing the index of the levels
         int m_LevelNumber;
 
+        int m_Width;
+        int m_Height;
+
         //creating a bool that will be used to store the information of the status of each level(if it is locked or not)
         bool m_IsLocked;
 
@@ -30,36 +34,39 @@ namespace Puzzle_Hustle_Winter_Edition
         public MapLevel(Texture2D texture, Texture2D lockedTexture, Vector2 position, int level, bool isLocked)
         {
             //assign variables to the parameters
-            m_Texture = texture;
+            m_ButtonTexture = texture;
             m_LockedTexture = lockedTexture;
             m_Position = position;
             m_LevelNumber = level;
             m_IsLocked = isLocked;
             
             //calculating the origin of the image
-            m_Origin = new Vector2(m_Texture.Width / 2, m_Texture.Height / 2);
+            m_Origin = new Vector2(m_ButtonTexture.Width / 2, m_ButtonTexture.Height / 2);
         }
 
         //creating a public update function which is called by the ScenesContent 
         public void Update(MouseState mouseState, SceneChanger sceneChanger)
         {
             //detecting if the mouse click is withing the position of the map level image
-            if (mouseState.X >= m_Position.X && mouseState.X <= m_Position.X + m_Texture.Width)
+            if (mouseState.X >= m_Position.X && mouseState.X <= m_Position.X + m_ButtonTexture.Width)
             {
-                if (mouseState.Y >= m_Position.Y && mouseState.Y <= m_Position.Y + m_Texture.Height)
+                if (mouseState.Y >= m_Position.Y && mouseState.Y <= m_Position.Y + m_ButtonTexture.Height)
                 {
                     //change the current scene to the game scene
                     sceneChanger.ChangeScene(SceneChanger.Scenes.Game);
 
                     //save the value of the current level in the sceneChanger
                     sceneChanger.currentLevel = m_LevelNumber;
+
+
+                    TileMap tileMap = new TileMap(m_Width, m_Height, m_GridTexture);
                 }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont font)
         {//drawing the button
-            spriteBatch.Draw(m_Texture, m_Position, Color.White);
+            spriteBatch.Draw(m_ButtonTexture, m_Position, Color.White);
             //drawing the locked image if the level is locked
             if (m_IsLocked)
             {
