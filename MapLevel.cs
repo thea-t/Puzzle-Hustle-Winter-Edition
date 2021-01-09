@@ -12,9 +12,10 @@ namespace Puzzle_Hustle_Winter_Edition
 {
     class MapLevel
     {
+        public TileMap tilemap;
+
         //creating texture2D variable that will be used to load and draw the images later on
         Texture2D m_ButtonTexture;
-        Texture2D m_GridTexture;
         Texture2D m_LockedTexture;
 
         //creating vector2 that will be used to place the images in certain positions later on
@@ -24,14 +25,12 @@ namespace Puzzle_Hustle_Winter_Edition
         //storing the index of the levels
         int m_LevelNumber;
 
-        int m_Width;
-        int m_Height;
 
         //creating a bool that will be used to store the information of the status of each level(if it is locked or not)
         bool m_IsLocked;
 
          //creating a constructor with different parameters
-        public MapLevel(Texture2D texture, Texture2D lockedTexture, Vector2 position, int level, bool isLocked)
+        public MapLevel(Texture2D texture, Texture2D lockedTexture,  Vector2 position, int level, bool isLocked)
         {
             //assign variables to the parameters
             m_ButtonTexture = texture;
@@ -40,6 +39,7 @@ namespace Puzzle_Hustle_Winter_Edition
             m_LevelNumber = level;
             m_IsLocked = isLocked;
             
+
             //calculating the origin of the image
             m_Origin = new Vector2(m_ButtonTexture.Width / 2, m_ButtonTexture.Height / 2);
         }
@@ -58,8 +58,7 @@ namespace Puzzle_Hustle_Winter_Edition
                     //save the value of the current level in the sceneChanger
                     sceneChanger.currentLevel = m_LevelNumber;
 
-
-                    TileMap tileMap = new TileMap(m_Width, m_Height, m_GridTexture);
+                    tilemap = new TileMap(m_LevelNumber + 2);
                 }
             }
         }

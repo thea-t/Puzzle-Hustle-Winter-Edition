@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Puzzle_Hustle_Winter_Edition
 {
     //how to draw textures from other classes https://community.monogame.net/t/drawing-from-a-new-class-is-not-working/11878/5
     class ScenesContent : DrawableGameComponent
     {
-
-
         //creating texture2D variable that will be used to load and draw the images later on
         Texture2D m_BackgroundImage;
         Texture2D m_Background2Image;
@@ -19,13 +18,10 @@ namespace Puzzle_Hustle_Winter_Edition
         Texture2D m_MapButtonImage;
         Texture2D m_LockedImage;
 
-        //MapLevel m_MapLevel1;
-        //MapLevel m_MapLevel2;
-        //MapLevel m_MapLevel3;
-        //MapLevel m_MapLevel4;
-        //MapLevel m_MapLevel5;
+        Texture2D[] m_Level1Textures = new Texture2D[9];
 
-        //creating an array of map levels https://stackoverflow.com/questions/3301678/how-to-declare-an-array-of-objects-in-c-sharp
+
+        //creating an array of map levels 
         MapLevel[] m_Levels = new MapLevel[5];
 
         //creating a variable of the sceneChanger class in order to be able to use it in this class
@@ -58,20 +54,22 @@ namespace Puzzle_Hustle_Winter_Edition
             m_MapButtonImage = Game.Content.Load<Texture2D>("art/Blue");
             m_LockedImage = Game.Content.Load<Texture2D>("art/LockInChains");
 
+            //loading multiple textures into an array: https://stackoverflow.com/questions/10705563/xna-storing-lots-of-texture2d-in-an-array
+            for (int i = 0; i < m_Level1Textures.Length; i++)
+            {
+                m_Level1Textures[i] = Game.Content.Load<Texture2D>("art/tiles/level1/" + (i + 1));
+            }
+
             m_PlayButtonPosition = new Vector2(600 - (m_PlayButtonImage.Width / 2), 350);
 
-        // m_Level1 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(100,100), 1, false);
-        //m_Level2 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(200,100), 2, true);
-        //m_Level3 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(300,100), 3, true);
-        //m_Level4 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(400,100), 4, true);
-        //m_Level5 = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(500,100), 5, true);
-
+       
         //creating instances of MapLevel and calling their constuctors 
         m_Levels[0] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(100, 100), 1, false);
         m_Levels[1] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(200, 100), 2, true);
         m_Levels[2] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(300, 100), 3, true);
         m_Levels[3] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(400, 100), 4, true);
         m_Levels[4] = new MapLevel(m_MapButtonImage, m_LockedImage, new Vector2(500, 100), 5, true);
+
     }
 
         //drawing different textures and font in specific positions, depending on the currently active scene
@@ -92,12 +90,6 @@ namespace Puzzle_Hustle_Winter_Edition
             {
                 m_SpriteBatch.Draw(m_Background2Image, new Vector2(0, 0));
 
-                //m_Level1.Draw(m_SpriteBatch, m_Font);
-                //m_Level2.Draw(m_SpriteBatch, m_Font);
-                //m_Level3.Draw(m_SpriteBatch, m_Font);
-                //m_Level4.Draw(m_SpriteBatch, m_Font);
-                //m_Level5.Draw(m_SpriteBatch, m_Font);
-
                 //drawing all the map level buttons 
                 for (int i = 0; i < m_Levels.Length; i++)
                 {
@@ -111,9 +103,17 @@ namespace Puzzle_Hustle_Winter_Edition
             {
                 m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
 
-                Vector2 levelTextPosition = new Vector2(100, 100);
                 //convert int to string http://zetcode.com/csharp/inttostring/
-                m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), levelTextPosition, Color.White, 0, levelTextPosition, 0.3f, SpriteEffects.None, 1);
+                m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(100, 100), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
+
+                if(m_SceneChanger.currentLevel == 1)
+                {
+                    m_Levels[0].tilemap.Draw(m_SpriteBatch, m_Level1Textures);
+                }
+                else if (m_SceneChanger.currentLevel == 2)
+                {
+                    m_Levels[1].tilemap.Draw(m_SpriteBatch, m_Level1Textures);
+                }
             }
             //result scene
             else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Result)
