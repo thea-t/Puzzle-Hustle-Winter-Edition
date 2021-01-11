@@ -18,11 +18,11 @@ namespace Puzzle_Hustle_Winter_Edition
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            ////////////////////////////////////////// http://rbwhitaker.wikidot.com/changing-the-window-size#:~:text=Introduction,window%20size%20for%20your%20game.
-            graphics.PreferredBackBufferWidth = 1200;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = 800;   // set this value to the desired height of your window
+            //changing the size of the window: http://rbwhitaker.wikidot.com/changing-the-window-size#:~:text=Introduction,window%20size%20for%20your%20game.
+            graphics.PreferredBackBufferWidth = 1200; 
+            graphics.PreferredBackBufferHeight = 800;  
             graphics.ApplyChanges();
-            //////////////////////////////////////////
+            
 
         }
 
@@ -36,13 +36,13 @@ namespace Puzzle_Hustle_Winter_Edition
         {
             // TODO: Add your initialization logic here
 
-            ////////////////////////////////////////////////
+           
             m_ScenesContent = new ScenesContent(this);
             Components.Add(m_ScenesContent);
 
             //how to show mouse https://stackoverflow.com/questions/22535699/mouse-cursor-is-not-showing-in-windows-store-game-developing-using-monogame
             this.IsMouseVisible = true;
-            /////////////////////////////////////////////////
+            
 
             base.Initialize();
         }

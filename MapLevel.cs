@@ -12,11 +12,14 @@ namespace Puzzle_Hustle_Winter_Edition
 {
     class MapLevel
     {
+        #region Variables
         public TileMap tilemap;
 
         //creating texture2D variable that will be used to load and draw the images later on
         Texture2D m_ButtonTexture;
         Texture2D m_LockedTexture;
+
+        Texture2D[] m_PuzzleTextures;
 
         //creating vector2 that will be used to place the images in certain positions later on
         Vector2 m_Position;
@@ -28,9 +31,10 @@ namespace Puzzle_Hustle_Winter_Edition
 
         //creating a bool that will be used to store the information of the status of each level(if it is locked or not)
         bool m_IsLocked;
+        #endregion
 
-         //creating a constructor with different parameters
-        public MapLevel(Texture2D texture, Texture2D lockedTexture,  Vector2 position, int level, bool isLocked)
+        //creating a constructor with different parameters
+        public MapLevel(Texture2D texture, Texture2D lockedTexture, Texture2D[] puzzleTextures, Vector2 position, int level, bool isLocked)
         {
             //assign variables to the parameters
             m_ButtonTexture = texture;
@@ -38,7 +42,7 @@ namespace Puzzle_Hustle_Winter_Edition
             m_Position = position;
             m_LevelNumber = level;
             m_IsLocked = isLocked;
-            
+            m_PuzzleTextures = puzzleTextures;
 
             //calculating the origin of the image
             m_Origin = new Vector2(m_ButtonTexture.Width / 2, m_ButtonTexture.Height / 2);
@@ -58,7 +62,9 @@ namespace Puzzle_Hustle_Winter_Edition
                     //save the value of the current level in the sceneChanger
                     sceneChanger.currentLevel = m_LevelNumber;
 
-                    tilemap = new TileMap(m_LevelNumber + 2);
+                    //create an instance of tilemap using the selected level
+                    //If the level is 1, it will create a 3x3 grid. If the level is 5, the grid will be 7x7
+                    tilemap = new TileMap(m_LevelNumber + 2, m_PuzzleTextures);
                 }
             }
         }

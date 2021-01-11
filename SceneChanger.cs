@@ -16,7 +16,7 @@ namespace Puzzle_Hustle_Winter_Edition
             Game,
             Result
         }
-        //storing public variables because that are being used by other classes
+        //storing public variables that are being used by other classes
         public Scenes currentScene;
         public int currentLevel;
 
