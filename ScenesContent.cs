@@ -16,6 +16,9 @@ namespace Puzzle_Hustle_Winter_Edition
         Texture2D m_Background4Image;
         Texture2D m_Background5Image;
         Texture2D m_PlayButtonImage;
+        Texture2D m_ButtonImage;
+        Texture2D m_ScorePannel;
+        Texture2D m_PuzzleBackground;
         Texture2D m_MapButtonImage;
         Texture2D m_LockedImage;
 
@@ -37,6 +40,7 @@ namespace Puzzle_Hustle_Winter_Edition
         SpriteFont m_Font;
 
         Vector2 m_PlayButtonPosition;
+        Vector2 m_ShuffleButtonPosition = new Vector2(840, 600);
 
         // storing the previous mouse state to make sure that the button was released before, and pressed now
         private MouseState oldState;
@@ -53,8 +57,6 @@ namespace Puzzle_Hustle_Winter_Edition
 
             #region Loading the font and the background images
 
-            //loading the font
-            m_Font = Game.Content.Load<SpriteFont>("Font");
 
             //loading the textures before drawing them
             m_BackgroundImage = Game.Content.Load<Texture2D>("art/Background1");
@@ -63,8 +65,15 @@ namespace Puzzle_Hustle_Winter_Edition
             m_Background4Image = Game.Content.Load<Texture2D>("art/Background4");
             m_Background5Image = Game.Content.Load<Texture2D>("art/Background5");
             m_PlayButtonImage = Game.Content.Load<Texture2D>("art/PlayButton");
+            m_ButtonImage = Game.Content.Load<Texture2D>("art/Button");
+            m_PuzzleBackground = Game.Content.Load<Texture2D>("art/puzzle-background");
+            m_ScorePannel = Game.Content.Load<Texture2D>("art/Moves");
             m_MapButtonImage = Game.Content.Load<Texture2D>("art/Blue");
             m_LockedImage = Game.Content.Load<Texture2D>("art/LockInChains");
+
+
+            //loading the font
+            m_Font = Game.Content.Load<SpriteFont>("Font");
             #endregion
 
             #region Loading the tiles textures in each level
@@ -99,11 +108,11 @@ namespace Puzzle_Hustle_Winter_Edition
             m_PlayButtonPosition = new Vector2(600 - (m_PlayButtonImage.Width / 2), 350);
 
             //creating instances of MapLevel and calling their constuctors 
-            m_Levels[0] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level1Textures, new Vector2(100, 100), 1, false);
-            m_Levels[1] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level2Textures, new Vector2(200, 100), 2, true);
-            m_Levels[2] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level3Textures, new Vector2(300, 100), 3, true);
-            m_Levels[3] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level4Textures, new Vector2(400, 100), 4, true);
-            m_Levels[4] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level5Textures, new Vector2(500, 100), 5, true);
+            m_Levels[0] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level1Textures, new Vector2(980, 270), 1, false);
+            m_Levels[1] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level2Textures, new Vector2(870, 490), 2, true);
+            m_Levels[2] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level3Textures, new Vector2(550, 600), 3, true);
+            m_Levels[3] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level4Textures, new Vector2(250, 570), 4, true);
+            m_Levels[4] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level5Textures, new Vector2(550, 170), 5, true);
             #endregion
         }
 
@@ -141,9 +150,13 @@ namespace Puzzle_Hustle_Winter_Edition
                 //if the currently active scene is the Game scene, then draw the background and check the curent level 
                 case SceneChanger.Scenes.Game:
                     m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
+                    m_SpriteBatch.Draw(m_ButtonImage, m_ShuffleButtonPosition);
+                    m_SpriteBatch.Draw(m_ScorePannel, new Vector2(800, 300));
+                    m_SpriteBatch.Draw(m_PuzzleBackground, new Vector2(100,140));
 
                     //convert int to string http://zetcode.com/csharp/inttostring/
-                    m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(100, 100), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
+                    m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(200, 100), Color.White, 0, new Vector2(200, 100), 0.3f, SpriteEffects.None, 1);
+                    m_SpriteBatch.DrawString(m_Font, "Shuffle", new Vector2(920,690), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
 
                     //draw different textures, depending on the curent level
                     m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Draw(m_SpriteBatch);
@@ -217,7 +230,6 @@ namespace Puzzle_Hustle_Winter_Edition
                 //cheking which is the currently active scene (if it is menu)
                 if (m_SceneChanger.currentScene == SceneChanger.Scenes.Menu)
                 {
-                    //checking if the mouse click's position is inside the button position
                     if (currentState.X >= m_PlayButtonPosition.X && currentState.X <= m_PlayButtonPosition.X + m_PlayButtonImage.Width)
                     {
                         if (currentState.Y >= m_PlayButtonPosition.Y && currentState.Y <= m_PlayButtonPosition.Y + m_PlayButtonImage.Height)
@@ -236,14 +248,25 @@ namespace Puzzle_Hustle_Winter_Edition
                         m_Levels[i].Update(currentState, m_SceneChanger);
                     }
                 }
-                
 
-            }
+                // calling the update function in tilemap, if game scene is active
+                else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
+                {
 
-            // calling the update function in tilemap, if game scene is active
-            if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
-            {
-                m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Update(currentState, oldState);
+                    //checking if the mouse click's position is inside the button position
+                    if (currentState.X >= m_ShuffleButtonPosition.X && currentState.X <= m_ShuffleButtonPosition.X + m_ButtonImage.Width)
+                    {
+                        if (currentState.Y >= m_ShuffleButtonPosition.Y && currentState.Y <= m_ShuffleButtonPosition.Y + m_ButtonImage.Height)
+                        {
+
+                            m_Levels[m_SceneChanger.currentLevel - 1].tilemap.ShuffleTiles();
+
+                        }
+                    }
+                    m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Update(currentState, oldState);
+
+
+                }
             }
 
             oldState = currentState; // this reassigns the old state so that it is ready for next time

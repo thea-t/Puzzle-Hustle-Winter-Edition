@@ -19,6 +19,7 @@
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/MenuButton.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/Moves.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/PlayButton.png</File>
+    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/puzzle-background.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/RepeatButton.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/SettingsButton.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/Star.png</File>
@@ -163,6 +164,7 @@
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/Font.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

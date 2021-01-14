@@ -215,3 +215,4 @@ C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edi
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\tiles\level2\7.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\tiles\level2\8.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\tiles\level2\9.xnb
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\puzzle-background.xnb
