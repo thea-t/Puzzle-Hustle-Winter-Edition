@@ -15,19 +15,15 @@ namespace Puzzle_Hustle_Winter_Edition
         #region Variables
         public TileMap tilemap;
 
-        //creating texture2D variable that will be used to load and draw the images later on
         Texture2D m_ButtonTexture;
         Texture2D m_LockedTexture;
-
         Texture2D[] m_PuzzleTextures;
 
-        //creating vector2 that will be used to place the images in certain positions later on
         Vector2 m_Position;
         Vector2 m_Origin;
         
         //storing the index of the levels
         int m_LevelNumber;
-
 
         //creating a bool that will be used to store the information of the status of each level(if it is locked or not)
         bool m_IsLocked;
@@ -62,7 +58,6 @@ namespace Puzzle_Hustle_Winter_Edition
                     //save the value of the current level in the sceneChanger
                     sceneChanger.currentLevel = m_LevelNumber;
 
-                    //create an instance of tilemap using the selected level
                     //If the level is 1, it will create a 3x3 grid. If the level is 5, the grid will be 7x7
                     tilemap = new TileMap(m_LevelNumber + 2, m_PuzzleTextures);
                 }
@@ -79,7 +74,7 @@ namespace Puzzle_Hustle_Winter_Edition
             }
 
             //convert int to string http://zetcode.com/csharp/inttostring/
-            //draw the levels
+            //drawing the levels
             spriteBatch.DrawString(font, m_LevelNumber.ToString(), new Vector2(m_Position.X + 60, m_Position.Y + 60), Color.White, 0, m_Origin, 0.5f, SpriteEffects.None, 1);
         }
 

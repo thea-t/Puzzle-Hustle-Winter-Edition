@@ -11,16 +11,18 @@ namespace Puzzle_Hustle_Winter_Edition
 {
     class TileMap
     {
-        int m_TileCount;
         float m_TileSize;
-        Texture2D[] m_TileTextures;
-        List<Tile> m_TilesToRandomize = new List<Tile>();
-        List<Tile> m_TilesInOrder = new List<Tile>();
-        Vector2 m_StartOffset = new Vector2(145, 190);
+        int m_TileCount;
         int m_DistanceBetweenTiles = 4;
-
         int m_CurrentlyDraggedTileIndex;
         int m_CurrentlyReleasedTileIndex;
+
+        Vector2 m_StartOffset = new Vector2(145, 190);
+        Texture2D[] m_TileTextures;
+
+        List<Tile> m_TilesToRandomize = new List<Tile>();
+        List<Tile> m_TilesInOrder = new List<Tile>();
+      
 
         public TileMap(int tileCount, Texture2D[] tileTextures)
         {
@@ -39,14 +41,9 @@ namespace Puzzle_Hustle_Winter_Edition
             {
                 for (int j = 0; j < m_TileCount; j++)
                 {
-                    m_TilesToRandomize.Add(new Tile(m_TileTextures[tileNumber], new Vector2(m_StartOffset.X + (m_TileSize + m_DistanceBetweenTiles) * j, m_StartOffset.Y + (m_TileSize + m_DistanceBetweenTiles) * i)));
+                    m_TilesToRandomize.Add(new Tile(new Vector2(m_StartOffset.X + (m_TileSize + m_DistanceBetweenTiles) * j, m_StartOffset.Y + (m_TileSize + m_DistanceBetweenTiles) * i)));
                     tileNumber++;
 
-                    if (tileNumber == tileCount*tileCount)
-                    {
-
-                        m_TilesToRandomize[tileNumber - 1].isLastTile = true;
-                    }
                 }
             }
 
@@ -79,7 +76,7 @@ namespace Puzzle_Hustle_Winter_Edition
                         {
                             m_CurrentlyReleasedTileIndex = i;
 
-                            if (m_TilesToRandomize[m_CurrentlyReleasedTileIndex].isLastTile)
+                            if (m_CurrentlyReleasedTileIndex == m_TileCount* m_TileCount - 1)
                             {
                                 // Check distance between two points: https://stackoverflow.com/questions/21870101/c-sharp-xna-calculate-distance-between-rectangles-rotation-friendly
                                 if (Vector2.Distance(m_TilesToRandomize[m_CurrentlyDraggedTileIndex].position, m_TilesToRandomize[m_CurrentlyReleasedTileIndex].position) <= m_TileSize + m_DistanceBetweenTiles)
@@ -132,6 +129,7 @@ namespace Puzzle_Hustle_Winter_Edition
             empty = m_TilesToRandomize[m_CurrentlyDraggedTileIndex];
             m_TilesToRandomize[m_CurrentlyDraggedTileIndex] = m_TilesToRandomize[m_CurrentlyReleasedTileIndex];
             m_TilesToRandomize[m_CurrentlyReleasedTileIndex] = empty;
+            Console.WriteLine(m_CurrentlyDraggedTileIndex);
         }
     }
 }

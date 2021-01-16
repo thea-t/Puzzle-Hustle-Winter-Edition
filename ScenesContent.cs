@@ -152,11 +152,11 @@ namespace Puzzle_Hustle_Winter_Edition
                     m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
                     m_SpriteBatch.Draw(m_ButtonImage, m_ShuffleButtonPosition);
                     m_SpriteBatch.Draw(m_ScorePannel, new Vector2(800, 300));
-                    m_SpriteBatch.Draw(m_PuzzleBackground, new Vector2(100,140));
+                    m_SpriteBatch.Draw(m_PuzzleBackground, new Vector2(100, 140));
 
                     //convert int to string http://zetcode.com/csharp/inttostring/
                     m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(200, 100), Color.White, 0, new Vector2(200, 100), 0.3f, SpriteEffects.None, 1);
-                    m_SpriteBatch.DrawString(m_Font, "Shuffle", new Vector2(920,690), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
+                    m_SpriteBatch.DrawString(m_Font, "Shuffle", new Vector2(920, 690), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
 
                     //draw different textures, depending on the curent level
                     m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Draw(m_SpriteBatch);
@@ -169,49 +169,6 @@ namespace Puzzle_Hustle_Winter_Edition
             }
             #endregion
 
-            #region backup
-            //if (m_SceneChanger.currentScene == SceneChanger.Scenes.Menu)
-            //{
-            //    m_SpriteBatch.Draw(m_BackgroundImage, new Vector2(0, 0));
-            //    m_SpriteBatch.DrawString(m_Font, "Puzzle", new Vector2(200, 100), Color.DarkRed);
-            //    m_SpriteBatch.DrawString(m_Font, "Hustle", new Vector2(400, 200), Color.DarkRed);
-            //    m_SpriteBatch.Draw(m_PlayButtonImage, m_PlayButtonPosition);
-            //}
-            //else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Map)
-            //{
-            //    m_SpriteBatch.Draw(m_Background2Image, new Vector2(0, 0));
-
-            //    //drawing all the map level buttons 
-            //    for (int i = 0; i < m_Levels.Length; i++)
-            //    {
-            //        m_Levels[i].Draw(m_SpriteBatch, m_Font);
-
-            //    }
-
-            //}
-            ////game scene
-            //else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
-            //{
-            //    m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
-
-            //    //convert int to string http://zetcode.com/csharp/inttostring/
-            //    m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(100, 100), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
-
-            //    if (m_SceneChanger.currentLevel == 1)
-            //    {
-            //        m_Levels[0].tilemap.Draw(m_SpriteBatch, m_Level1Textures);
-            //    }
-            //    else if (m_SceneChanger.currentLevel == 2)
-            //    {
-            //        m_Levels[1].tilemap.Draw(m_SpriteBatch, m_Level1Textures);
-            //    }
-            //}
-            ////result scene
-            //else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Result)
-            //{
-            //    m_SpriteBatch.Draw(m_Background5Image, new Vector2(0, 0));
-            //}
-            #endregion
             m_SpriteBatch.End();
 
             base.Draw(gameTime);
@@ -227,48 +184,46 @@ namespace Puzzle_Hustle_Winter_Edition
             // checking if the button was pressed in the current state and if it was released in the old state
             if (currentState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
-                //cheking which is the currently active scene (if it is menu)
-                if (m_SceneChanger.currentScene == SceneChanger.Scenes.Menu)
+                //cheking which is the currently active scene
+                switch (m_SceneChanger.currentScene)
                 {
-                    if (currentState.X >= m_PlayButtonPosition.X && currentState.X <= m_PlayButtonPosition.X + m_PlayButtonImage.Width)
-                    {
-                        if (currentState.Y >= m_PlayButtonPosition.Y && currentState.Y <= m_PlayButtonPosition.Y + m_PlayButtonImage.Height)
+                    case SceneChanger.Scenes.Menu:
+                        if (currentState.X >= m_PlayButtonPosition.X && currentState.X <= m_PlayButtonPosition.X + m_PlayButtonImage.Width)
                         {
-                            //if all the conditions are met, go to a different scene (map)
-                            m_SceneChanger.ChangeScene(SceneChanger.Scenes.Map);
+                            if (currentState.Y >= m_PlayButtonPosition.Y && currentState.Y <= m_PlayButtonPosition.Y + m_PlayButtonImage.Height)
+                            {
+                                //if all the conditions are met, go to a different scene (map)
+                                m_SceneChanger.ChangeScene(SceneChanger.Scenes.Map);
+                            }
                         }
-                    }
-                }
-                //cheking which is the currently active scene (if it is map)
-                else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Map)
-                {
-                    //calling the update function on each level
-                    for (int i = 0; i < m_Levels.Length; i++)
-                    {
-                        m_Levels[i].Update(currentState, m_SceneChanger);
-                    }
-                }
-
-                // calling the update function in tilemap, if game scene is active
-                else if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
-                {
-
-                    //checking if the mouse click's position is inside the button position
-                    if (currentState.X >= m_ShuffleButtonPosition.X && currentState.X <= m_ShuffleButtonPosition.X + m_ButtonImage.Width)
-                    {
-                        if (currentState.Y >= m_ShuffleButtonPosition.Y && currentState.Y <= m_ShuffleButtonPosition.Y + m_ButtonImage.Height)
+                        break;
+                    case SceneChanger.Scenes.Map:
+                        //calling the update function on each level
+                        for (int i = 0; i < m_Levels.Length; i++)
                         {
-
-                            m_Levels[m_SceneChanger.currentLevel - 1].tilemap.ShuffleTiles();
-
+                            m_Levels[i].Update(currentState, m_SceneChanger);
                         }
-                    }
-                    m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Update(currentState, oldState);
+                        break;
+                    case SceneChanger.Scenes.Game:
+                        //checking if the mouse click's position is inside the button position
+                        if (currentState.X >= m_ShuffleButtonPosition.X && currentState.X <= m_ShuffleButtonPosition.X + m_ButtonImage.Width)
+                        {
+                            if (currentState.Y >= m_ShuffleButtonPosition.Y && currentState.Y <= m_ShuffleButtonPosition.Y + m_ButtonImage.Height)
+                            {
 
+                                m_Levels[m_SceneChanger.currentLevel - 1].tilemap.ShuffleTiles();
 
+                            }
+                        }
+                        break;
                 }
             }
 
+            if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
+            {
+                m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Update(currentState, oldState);
+            }
+                        
             oldState = currentState; // this reassigns the old state so that it is ready for next time
         }
     }
