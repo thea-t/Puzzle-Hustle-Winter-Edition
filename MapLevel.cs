@@ -13,7 +13,7 @@ namespace Puzzle_Hustle_Winter_Edition
     class MapLevel
     {
         #region Variables
-        public TileMap tilemap;
+        public TileMap tileMap;
 
         Texture2D m_ButtonTexture;
         Texture2D m_LockedTexture;
@@ -59,7 +59,7 @@ namespace Puzzle_Hustle_Winter_Edition
                     sceneChanger.currentLevel = m_LevelNumber;
 
                     //If the level is 1, it will create a 3x3 grid. If the level is 5, the grid will be 7x7
-                    tilemap = new TileMap(m_LevelNumber + 2, m_PuzzleTextures);
+                    tileMap = new TileMap(m_LevelNumber + 2, m_PuzzleTextures);
                 }
             }
         }

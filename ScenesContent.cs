@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Puzzle_Hustle_Winter_Edition
@@ -18,6 +19,7 @@ namespace Puzzle_Hustle_Winter_Edition
         Texture2D m_PlayButtonImage;
         Texture2D m_ButtonImage;
         Texture2D m_ScorePannel;
+        Texture2D m_Timer;
         Texture2D m_PuzzleBackground;
         Texture2D m_MapButtonImage;
         Texture2D m_LockedImage;
@@ -29,6 +31,7 @@ namespace Puzzle_Hustle_Winter_Edition
         Texture2D[] m_Level4Textures = new Texture2D[36];
         Texture2D[] m_Level5Textures = new Texture2D[49];
 
+     
         //creating an array of map levels 
         MapLevel[] m_Levels = new MapLevel[5];
 
@@ -40,6 +43,7 @@ namespace Puzzle_Hustle_Winter_Edition
         SpriteFont m_Font;
 
         Vector2 m_PlayButtonPosition;
+        Vector2 m_ScorePosition;
         Vector2 m_ShuffleButtonPosition = new Vector2(840, 600);
 
         // storing the previous mouse state to make sure that the button was released before, and pressed now
@@ -68,6 +72,7 @@ namespace Puzzle_Hustle_Winter_Edition
             m_ButtonImage = Game.Content.Load<Texture2D>("art/Button");
             m_PuzzleBackground = Game.Content.Load<Texture2D>("art/puzzle-background");
             m_ScorePannel = Game.Content.Load<Texture2D>("art/Moves");
+            m_Timer = Game.Content.Load<Texture2D>("art/Clock");
             m_MapButtonImage = Game.Content.Load<Texture2D>("art/Blue");
             m_LockedImage = Game.Content.Load<Texture2D>("art/LockInChains");
 
@@ -106,6 +111,7 @@ namespace Puzzle_Hustle_Winter_Edition
 
             #region Loading button images
             m_PlayButtonPosition = new Vector2(600 - (m_PlayButtonImage.Width / 2), 350);
+            m_ScorePosition = new Vector2(980, 280);
 
             //creating instances of MapLevel and calling their constuctors 
             m_Levels[0] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level1Textures, new Vector2(980, 270), 1, false);
@@ -151,15 +157,24 @@ namespace Puzzle_Hustle_Winter_Edition
                 case SceneChanger.Scenes.Game:
                     m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
                     m_SpriteBatch.Draw(m_ButtonImage, m_ShuffleButtonPosition);
-                    m_SpriteBatch.Draw(m_ScorePannel, new Vector2(800, 300));
+                    m_SpriteBatch.Draw(m_ScorePannel, new Vector2(800, 160));
+                    m_SpriteBatch.Draw(m_Timer, new Vector2(830, 470));
                     m_SpriteBatch.Draw(m_PuzzleBackground, new Vector2(100, 140));
 
-                    //convert int to string http://zetcode.com/csharp/inttostring/
+                //convert int to string http://zetcode.com/csharp/inttostring/
                     m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(200, 100), Color.White, 0, new Vector2(200, 100), 0.3f, SpriteEffects.None, 1);
                     m_SpriteBatch.DrawString(m_Font, "Shuffle", new Vector2(920, 690), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
+                    m_SpriteBatch.DrawString(m_Font, "moves", new Vector2(940, 330), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
+                    m_SpriteBatch.DrawString(m_Font, m_Levels[m_SceneChanger.currentLevel - 1].tileMap.scoreCalculator.movesCount.ToString() , m_ScorePosition, Color.White, 0, new Vector2(100, 100), 0.8f, SpriteEffects.None, 1);
+                   
+                    //Leave only two decimal places after the dot: https://stackoverflow.com/questions/1291483/leave-only-two-decimal-places-after-the-dot
+                    m_SpriteBatch.DrawString(m_Font, String.Format("{0:0.00}", m_Levels[m_SceneChanger.currentLevel - 1].tileMap.scoreCalculator.passedTime), new Vector2(980, 530), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
+
+
+                   
 
                     //draw different textures, depending on the curent level
-                    m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Draw(m_SpriteBatch);
+                    m_Levels[m_SceneChanger.currentLevel - 1].tileMap.Draw(m_SpriteBatch);
                     break;
 
                 //if the currently active scene is the Result scene
@@ -211,7 +226,7 @@ namespace Puzzle_Hustle_Winter_Edition
                             if (currentState.Y >= m_ShuffleButtonPosition.Y && currentState.Y <= m_ShuffleButtonPosition.Y + m_ButtonImage.Height)
                             {
 
-                                m_Levels[m_SceneChanger.currentLevel - 1].tilemap.ShuffleTiles();
+                                m_Levels[m_SceneChanger.currentLevel - 1].tileMap.ShuffleTiles();
 
                             }
                         }
@@ -221,7 +236,9 @@ namespace Puzzle_Hustle_Winter_Edition
 
             if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
             {
-                m_Levels[m_SceneChanger.currentLevel - 1].tilemap.Update(currentState, oldState);
+                m_Levels[m_SceneChanger.currentLevel - 1].tileMap.Update(currentState, oldState);
+                m_Levels[m_SceneChanger.currentLevel - 1].tileMap.scoreCalculator.Update(gameTime);
+                
             }
                         
             oldState = currentState; // this reassigns the old state so that it is ready for next time
