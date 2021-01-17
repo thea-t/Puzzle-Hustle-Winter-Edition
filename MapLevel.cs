@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,19 +48,25 @@ namespace Puzzle_Hustle_Winter_Edition
         //creating a public update function which is called by the ScenesContent 
         public void Update(MouseState mouseState, SceneChanger sceneChanger)
         {
-            //detecting if the mouse click is withing the position of the map level image
-            if (mouseState.X >= m_Position.X && mouseState.X <= m_Position.X + m_ButtonTexture.Width)
+            if (m_IsLocked == false)
             {
-                if (mouseState.Y >= m_Position.Y && mouseState.Y <= m_Position.Y + m_ButtonTexture.Height)
+
+                //detecting if the mouse click is withing the position of the map level image
+                if (mouseState.X >= m_Position.X && mouseState.X <= m_Position.X + m_ButtonTexture.Width)
                 {
-                    //change the current scene to the game scene
-                    sceneChanger.ChangeScene(SceneChanger.Scenes.Game);
+                    if (mouseState.Y >= m_Position.Y && mouseState.Y <= m_Position.Y + m_ButtonTexture.Height)
+                    {
 
-                    //save the value of the current level in the sceneChanger
-                    sceneChanger.currentLevel = m_LevelNumber;
+                        sceneChanger.scenesContent.PuzzleBackgroundMusic();
+                        //change the current scene to the game scene
+                        sceneChanger.ChangeScene(SceneChanger.Scenes.Game);
 
-                    //If the level is 1, it will create a 3x3 grid. If the level is 5, the grid will be 7x7
-                    tileMap = new TileMap(m_LevelNumber + 2, m_PuzzleTextures);
+                        //save the value of the current level in the sceneChanger
+                        sceneChanger.currentLevel = m_LevelNumber;
+
+                        //If the level is 1, it will create a 3x3 grid. If the level is 5, the grid will be 7x7
+                        tileMap = new TileMap(m_LevelNumber + 2, m_PuzzleTextures, sceneChanger);
+                    }
                 }
             }
         }
@@ -76,6 +83,14 @@ namespace Puzzle_Hustle_Winter_Edition
             //convert int to string http://zetcode.com/csharp/inttostring/
             //drawing the levels
             spriteBatch.DrawString(font, m_LevelNumber.ToString(), new Vector2(m_Position.X + 60, m_Position.Y + 60), Color.White, 0, m_Origin, 0.5f, SpriteEffects.None, 1);
+        }
+
+        public void RestartLevel()
+        {
+            tileMap.ShuffleTiles();
+            tileMap.scoreCalculator.movesCount = 0;
+            tileMap.scoreCalculator.passedTime = 0;
+
         }
 
         //unlocks the levels

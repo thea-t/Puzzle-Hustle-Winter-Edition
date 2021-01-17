@@ -14,11 +14,16 @@ namespace Puzzle_Hustle_Winter_Edition
             Menu,
             Map,
             Game,
-            Result
+            Result,
+            Paused
         }
+        public ScenesContent scenesContent;
+
         //storing public variables that are being used by other classes
         public Scenes currentScene;
         public int currentLevel;
+        
+       
 
         //function that changes the scene
         public void ChangeScene(Scenes newScene)

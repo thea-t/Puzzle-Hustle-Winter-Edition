@@ -17,15 +17,13 @@
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/InactiveSound.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/LockInChains.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/MenuButton.png</File>
+    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/Mouse.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/Moves.png</File>
+    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/PauseButton.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/PlayButton.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/puzzle-background.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/RepeatButton.png</File>
-    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/SettingsButton.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/Star.png</File>
-    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/star1.png</File>
-    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/star2.png</File>
-    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/star3.png</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/tiles/level1/1.jpg</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/tiles/level1/2.jpg</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/tiles/level1/3.jpg</File>
@@ -162,6 +160,8 @@
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/tiles/level5/8.jpg</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/art/tiles/level5/9.jpg</File>
     <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/Font.spritefont</File>
+    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/MenuMusic.mp3</File>
+    <File>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/Music.mp3</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

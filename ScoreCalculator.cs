@@ -11,7 +11,7 @@ namespace Puzzle_Hustle_Winter_Edition
     {
         public int movesCount;
         public float passedTime;
-
+        public int score;
 
         public void Update(GameTime gameTime)
         {
@@ -21,12 +21,18 @@ namespace Puzzle_Hustle_Winter_Edition
 
         }
 
-       public void CheckScore()
+        public void DisplayScore(SceneChanger sceneChanger)
         {
+            sceneChanger.ChangeScene(SceneChanger.Scenes.Result);
 
-            Console.WriteLine("test");
-            
+            score = 1000000000 / ((int)passedTime * movesCount);
+
+            sceneChanger.scenesContent.UnlockNextLevel();
+
         }
+
+
+
     }
 
 }

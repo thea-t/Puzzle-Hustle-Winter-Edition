@@ -12,7 +12,7 @@ namespace Puzzle_Hustle_Winter_Edition
     class TileMap
     {
         public ScoreCalculator scoreCalculator;
-
+        SceneChanger m_SceneChanger;
 
 
         float m_TileSize;
@@ -28,11 +28,11 @@ namespace Puzzle_Hustle_Winter_Edition
         List<Tile> m_OrderedTiles = new List<Tile>();
 
 
-        public TileMap(int tileCount, Texture2D[] tileTextures)
+        public TileMap(int tileCount, Texture2D[] tileTextures, SceneChanger sceneChanger)
         {
 
             scoreCalculator = new ScoreCalculator();
-
+            m_SceneChanger = sceneChanger;
             m_TileCount = tileCount;
             m_TileTextures = tileTextures;
 
@@ -57,8 +57,7 @@ namespace Puzzle_Hustle_Winter_Edition
             // https://stackoverflow.com/questions/1952185/how-do-i-copy-items-from-list-to-list-without-foreach
             m_OrderedTiles = new List<Tile>(m_Tiles);
 
-
-            ShuffleTiles();
+            //ShuffleTiles();
         }
 
 
@@ -152,11 +151,13 @@ namespace Puzzle_Hustle_Winter_Edition
                     correctCount++;
                 };
             }
-            Console.WriteLine(correctCount);
             if (correctCount == m_OrderedTiles.Count)
             {
-                scoreCalculator.CheckScore();
+                scoreCalculator.DisplayScore(m_SceneChanger);
+
             }
+
+
             //issue: identifying when the puzzle is solved. Solution: on top
             //// how to check if two lists have same items https://stackoverflow.com/questions/22173762/check-if-two-lists-are-equal
             //if (m_Tiles.Equals(m_OrderedTiles))

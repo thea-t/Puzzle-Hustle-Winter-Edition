@@ -66,11 +66,7 @@ C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edi
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\Moves.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\PlayButton.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\RepeatButton.xnb
-C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\SettingsButton.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\Star.xnb
-C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\star1.xnb
-C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\star2.xnb
-C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\star3.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\Font.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Puzzle Hustle-Winter Edition.exe
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Puzzle Hustle-Winter Edition.pdb
@@ -216,3 +212,9 @@ C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edi
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\tiles\level2\8.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\tiles\level2\9.xnb
 C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\puzzle-background.xnb
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\PauseButton.xnb
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\Music.xnb
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\Music.ogg
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\MenuMusic.ogg
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\MenuMusic.xnb
+C:\PROJECTS\MonoGame Games\Puzzle Hustle-Winter Edition\Puzzle-Hustle-Winter-Edition\bin\DesktopGL\AnyCPU\Debug\Content\art\Mouse.xnb

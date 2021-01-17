@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/MenuMusic.mp3</SourceFile>
+  <SourceTime>2021-01-17T19:11:10.4017446+00:00</SourceTime>
+  <DestFile>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/bin/DesktopGL/MenuMusic.xnb</DestFile>
+  <DestTime>2021-01-17T19:33:06.755837+00:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2018-09-23T22:55:52+01:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2018-09-23T22:55:52+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/PROJECTS/MonoGame Games/Puzzle Hustle-Winter Edition/Puzzle-Hustle-Winter-Edition/Content/bin/DesktopGL/MenuMusic.ogg</string>
+  </BuildOutput>
+</PipelineBuildEvent>
