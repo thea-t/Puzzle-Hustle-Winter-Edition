@@ -17,15 +17,16 @@ namespace Puzzle_Hustle_Winter_Edition
             Result,
             Paused
         }
+
+        //storing the scenes content here so that the MapLevel and the ScoreCalculator class can access it 
         public ScenesContent scenesContent;
 
-        //storing public variables that are being used by other classes
-        public Scenes currentScene;
+        //storing the current level so that the MapLevel and the ScenesContent class can access it
         public int currentLevel;
-        
-       
 
-        //function that changes the scene
+        public Scenes currentScene;
+
+        //function that changes the scene by assigning the current scene to the new scene
         public void ChangeScene(Scenes newScene)
         {
             currentScene = newScene;

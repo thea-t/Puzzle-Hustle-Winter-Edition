@@ -11,7 +11,6 @@ namespace Puzzle_Hustle_Winter_Edition
     class ScenesContent : DrawableGameComponent
     {
         #region Variables
-        //creating Texture2D variables that will be used to load and draw the images later on
         Texture2D m_BackgroundImage;
         Texture2D m_Background2Image;
         Texture2D m_Background3Image;
@@ -38,18 +37,8 @@ namespace Puzzle_Hustle_Winter_Edition
         Texture2D[] m_Level4Textures = new Texture2D[36];
         Texture2D[] m_Level5Textures = new Texture2D[49];
 
-        
-
-        //creating an array of map levels 
+        //array of map levels 
         MapLevel[] m_Levels = new MapLevel[5];
-
-        //creating a new instance of the SceneChanger class
-        SceneChanger m_SceneChanger = new SceneChanger();
-
-        SpriteBatch m_SpriteBatch;
-        SpriteFont m_Font;
-        Song m_PuzzleMusic;
-        Song m_MenuMusic;
 
         Vector2 m_PlayButtonPosition;
         Vector2 m_PauseButtonPosition;
@@ -62,10 +51,18 @@ namespace Puzzle_Hustle_Winter_Edition
         Vector2 m_ScorePosition;
         Vector2 m_ShuffleButtonPosition;
 
+        SpriteBatch m_SpriteBatch;
+        SpriteFont m_Font;
+        Song m_PuzzleMusic;
+        Song m_MenuMusic;
+
+        SceneChanger m_SceneChanger = new SceneChanger();
+
         // storing the previous mouse state to make sure that the button was released before, and pressed now
         private MouseState oldState;
         #endregion
 
+        //creating an empty constructor that will receive the main Game class in order to be able to run the Draw and Update functions from this class
         public ScenesContent(Game game) : base(game)
         {
         }
@@ -73,13 +70,13 @@ namespace Puzzle_Hustle_Winter_Edition
 
         protected override void LoadContent()
         {
+            //storing this ScenesContent in SceneChanger so that other classes can access ScenesContent
             m_SceneChanger.scenesContent = this;
-
             m_SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             
 
-            #region Loading the font and the background images
+            #region Loading the font, music and the background images
 
 
             //loading the textures before drawing them
@@ -106,7 +103,7 @@ namespace Puzzle_Hustle_Winter_Edition
             //loading the font
             //loading the music: http://rbwhitaker.wikidot.com/playing-background-music
             m_Font = Game.Content.Load<SpriteFont>("Font"); 
-            m_PuzzleMusic = Game.Content.Load<Song>("Music");  // Put the name of your song here instead of "song_title"
+            m_PuzzleMusic = Game.Content.Load<Song>("Music"); 
             m_MenuMusic = Game.Content.Load<Song>("MenuMusic");  
 
 
@@ -154,7 +151,7 @@ namespace Puzzle_Hustle_Winter_Edition
             m_ScorePosition = new Vector2(980, 280);
             m_ShuffleButtonPosition = new Vector2(840, 600);
 
-            //creating instances of MapLevel and calling their constuctors 
+            //creating 5 MapLevels and giving them their parameters  
             m_Levels[0] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level1Textures, new Vector2(980, 270), 1, false);
             m_Levels[1] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level2Textures, new Vector2(870, 490), 2, true);
             m_Levels[2] = new MapLevel(m_MapButtonImage, m_LockedImage, m_Level3Textures, new Vector2(550, 600), 3, true);
@@ -169,24 +166,27 @@ namespace Puzzle_Hustle_Winter_Edition
         {
             m_SpriteBatch.Begin();
 
-            #region Drawing elements, depending on the currently active scene
+            //drawing background images, buttons and text, depending on the currently active scene
             //switch statements: https://stackskills.com/courses/590152/lectures/10608229
+            //color: https://www.c-sharpcorner.com/UploadFile/iersoy/how-to-use-colors-in-xna/
 
             switch (m_SceneChanger.currentScene)
             {
-                //if the currently active scene is the Menu scene, then draw the background images, buttons and text
-                //color: https://www.c-sharpcorner.com/UploadFile/iersoy/how-to-use-colors-in-xna/
                 case SceneChanger.Scenes.Menu:
+
+                    //draw textures and font 
                     m_SpriteBatch.Draw(m_BackgroundImage, new Vector2(0, 0));
                     m_SpriteBatch.DrawString(m_Font, "Puzzle", new Vector2(120, 100), new Color(230, 37, 53));
                     m_SpriteBatch.DrawString(m_Font, "Hustle", new Vector2(620, 100), new Color(230, 37, 53));
                     m_SpriteBatch.Draw(m_PlayButtonImage, m_PlayButtonPosition);
                     break;
 
-                //if the currently active scene is the Map scene, then draw the background and all the level buttons 
                 case SceneChanger.Scenes.Map:
+                    
+                    //draw the background image
                     m_SpriteBatch.Draw(m_Background2Image, new Vector2(0, 0));
-
+                    
+                    //change the texture of the sound button, depending on if the music is running or not
                     if (MediaPlayer.IsMuted == false)
                     {
                         m_SpriteBatch.Draw(m_ActiveSoundButtonImage, m_SoundButtonPosition);
@@ -196,6 +196,7 @@ namespace Puzzle_Hustle_Winter_Edition
                         m_SpriteBatch.Draw(m_InactiveSoundButtonImage, m_SoundButtonPosition);
                     }
 
+                    //for each level, call the Draw function that was created in the MapLevel class 
                     for (int i = 0; i < m_Levels.Length; i++)
                     {
                         m_Levels[i].Draw(m_SpriteBatch, m_Font);
@@ -203,8 +204,8 @@ namespace Puzzle_Hustle_Winter_Edition
                     }
                     break;
 
-                //if the currently active scene is the Game scene, then draw the background and check the curent level 
                 case SceneChanger.Scenes.Game:
+                    //draw textures
                     m_SpriteBatch.Draw(m_Background3Image, new Vector2(0, 0));
                     m_SpriteBatch.Draw(m_ButtonImage, m_ShuffleButtonPosition);
                     m_SpriteBatch.Draw(m_PauseButtonImage, m_PauseButtonPosition);
@@ -212,6 +213,7 @@ namespace Puzzle_Hustle_Winter_Edition
                     m_SpriteBatch.Draw(m_Timer, new Vector2(830, 470));
                     m_SpriteBatch.Draw(m_PuzzleBackground, new Vector2(100, 140));
 
+                    //change the texture of the sound button, depending on if the music is running or not
                     if (MediaPlayer.IsMuted == false)
                     {
                         m_SpriteBatch.Draw(m_ActiveSoundButtonImage, m_SoundButtonPosition);
@@ -221,24 +223,23 @@ namespace Puzzle_Hustle_Winter_Edition
                         m_SpriteBatch.Draw(m_InactiveSoundButtonImage, m_SoundButtonPosition);
                     }
 
+                    //draw font, give it a position and color
                     //convert int to string http://zetcode.com/csharp/inttostring/
                     m_SpriteBatch.DrawString(m_Font, "Level: " + m_SceneChanger.currentLevel.ToString(), new Vector2(200, 100), Color.White, 0, new Vector2(200, 100), 0.3f, SpriteEffects.None, 1);
                     m_SpriteBatch.DrawString(m_Font, "Shuffle", m_ShuffleButtonPosition + new Vector2(80, 90), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
                     m_SpriteBatch.DrawString(m_Font, "moves", new Vector2(940, 330), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
                     m_SpriteBatch.DrawString(m_Font, m_Levels[m_SceneChanger.currentLevel - 1].tileMap.scoreCalculator.movesCount.ToString(), m_ScorePosition, Color.White, 0, new Vector2(100, 100), 0.8f, SpriteEffects.None, 1);
 
-                    //Leave only two decimal places after the dot: https://stackoverflow.com/questions/1291483/leave-only-two-decimal-places-after-the-dot
+                    //drawing the currently passed time
+                    //leave only two decimal places after the dot: https://stackoverflow.com/questions/1291483/leave-only-two-decimal-places-after-the-dot
                     m_SpriteBatch.DrawString(m_Font, String.Format("{0:0.00}", m_Levels[m_SceneChanger.currentLevel - 1].tileMap.scoreCalculator.passedTime), new Vector2(980, 530), Color.White, 0, new Vector2(100, 100), 0.3f, SpriteEffects.None, 1);
 
-
-
-
-                    //draw different textures, depending on the curent level
+                    //drawing the current level's tile map by calling its draw function
                     m_Levels[m_SceneChanger.currentLevel - 1].tileMap.Draw(m_SpriteBatch);
                     break;
 
-                //if the currently active scene is the Result scene
                 case SceneChanger.Scenes.Result:
+                    //drawing textures and font
                     m_SpriteBatch.Draw(m_Background5Image, new Vector2(0, 0));
                     m_SpriteBatch.Draw(m_Snowflake, new Vector2(710, 120));
                     m_SpriteBatch.Draw(m_Snowflake, new Vector2(520, 100));
@@ -250,6 +251,7 @@ namespace Puzzle_Hustle_Winter_Edition
                     break;
 
                 case SceneChanger.Scenes.Paused:
+                    //drawing textures and font
                     m_SpriteBatch.Draw(m_Background4Image, new Vector2(0, 0));
                     m_SpriteBatch.Draw(m_ButtonImage, m_ResumeButtonPosition);
                     m_SpriteBatch.Draw(m_ButtonImage, m_RestartButtonPosition);
@@ -261,7 +263,6 @@ namespace Puzzle_Hustle_Winter_Edition
 
                     break;
             }
-            #endregion
 
             m_SpriteBatch.End();
 
@@ -272,21 +273,21 @@ namespace Puzzle_Hustle_Winter_Edition
         {
             base.Update(gameTime);
 
-            // getting the current state of the mouse http://rbwhitaker.wikidot.com/mouse-input
+            //mouse states:  http://rbwhitaker.wikidot.com/mouse-input
             MouseState currentState = Mouse.GetState();
 
-            // checking if the button was pressed in the current state and if it was released in the old state
             if (currentState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
                 //cheking which is the currently active scene
                 switch (m_SceneChanger.currentScene)
                 {
+                    
                     case SceneChanger.Scenes.Menu:
+                        //if the current scene is menu and the play button was pressed, go to the Map scene, play its music and loop it
                         if (currentState.X >= m_PlayButtonPosition.X && currentState.X <= m_PlayButtonPosition.X + m_PlayButtonImage.Width)
                         {
                             if (currentState.Y >= m_PlayButtonPosition.Y && currentState.Y <= m_PlayButtonPosition.Y + m_PlayButtonImage.Height)
                             {
-                                //if all the conditions are met, go to a different scene (map)
                                 m_SceneChanger.ChangeScene(SceneChanger.Scenes.Map);
                                 MapSceneMusic();
 
@@ -296,8 +297,9 @@ namespace Puzzle_Hustle_Winter_Edition
                             }
                         }
                         break;
+                   
                     case SceneChanger.Scenes.Map:
-                       
+                        //if the current scene is map and the sound button was pressed, mute the music. If the music is already muted - play it
                         if (currentState.X >= m_SoundButtonPosition.X && currentState.X <= m_SoundButtonPosition.X + m_ActiveSoundButtonImage.Width)
                         {
                             if (currentState.Y >= m_SoundButtonPosition.Y && currentState.Y <= m_SoundButtonPosition.Y + m_ActiveSoundButtonImage.Height)
@@ -314,14 +316,14 @@ namespace Puzzle_Hustle_Winter_Edition
 
                             }
                         }
-                        //calling the update function on each level
+                        //calling the Update function for each Map level
                         for (int i = 0; i < m_Levels.Length; i++)
                         {
                             m_Levels[i].Update(currentState, m_SceneChanger);
                         }
                         break;
                     case SceneChanger.Scenes.Game:
-
+                        //if the current scene is game and the sound button was pressed, mute the music. If the music is already muted - play it
                         if (currentState.X >= m_SoundButtonPosition.X && currentState.X <= m_SoundButtonPosition.X + m_ActiveSoundButtonImage.Width)
                         {
                             if (currentState.Y >= m_SoundButtonPosition.Y && currentState.Y <= m_SoundButtonPosition.Y + m_ActiveSoundButtonImage.Height)
@@ -338,16 +340,17 @@ namespace Puzzle_Hustle_Winter_Edition
 
                             }
                         }
-                        //checking if the mouse click's position is inside the button position
+                        //checking if the shuffle button was pressed
                         if (currentState.X >= m_ShuffleButtonPosition.X && currentState.X <= m_ShuffleButtonPosition.X + m_ButtonImage.Width)
                         {
                             if (currentState.Y >= m_ShuffleButtonPosition.Y && currentState.Y <= m_ShuffleButtonPosition.Y + m_ButtonImage.Height)
                             {
-
+                                //shuffling the tiles in the current level's TileMap
                                 m_Levels[m_SceneChanger.currentLevel - 1].tileMap.ShuffleTiles();
 
                             }
                         }
+                        // if the pause button is pressed, go to the Pause scene
                         if (currentState.X >= m_PauseButtonPosition.X && currentState.X <= m_PauseButtonPosition.X + m_PauseButtonImage.Width)
                         {
                             if (currentState.Y >= m_PauseButtonPosition.Y && currentState.Y <= m_PauseButtonPosition.Y + m_PauseButtonImage.Height)
@@ -356,7 +359,9 @@ namespace Puzzle_Hustle_Winter_Edition
                             }
                         }
                         break;
+
                     case SceneChanger.Scenes.Result:
+                        //if the current scene is result and the menu button was pressed, go to the Map Scene and play the music for that scene
                         if (currentState.X >= m_MenuButtonPosition.X && currentState.X <= m_MenuButtonPosition.X + m_MenuButtonImage.Width)
                         {
                             if (currentState.Y >= m_MenuButtonPosition.Y && currentState.Y <= m_MenuButtonPosition.Y + m_MenuButtonImage.Height)
@@ -366,6 +371,7 @@ namespace Puzzle_Hustle_Winter_Edition
                                 MapSceneMusic();
                             }
                         }
+                        //if the repeat button was pressed, go to the Game scene and call the RestartLevel function for the current level
                         if (currentState.X >= m_RepeatButtonPosition.X && currentState.X <= m_RepeatButtonPosition.X + m_RepeatButtonImage.Width)
                         {
                             if (currentState.Y >= m_RepeatButtonPosition.Y && currentState.Y <= m_RepeatButtonPosition.Y + m_RepeatButtonImage.Height)
@@ -377,7 +383,9 @@ namespace Puzzle_Hustle_Winter_Edition
                             }
                         }
                         break;
+
                     case SceneChanger.Scenes.Paused:
+                        //if the current scene is Pause and restart button was pressed, go to the Game scene and call the RestartLevel function for the current level
                         if (currentState.X >= m_RestartButtonPosition.X && currentState.X <= m_RestartButtonPosition.X + m_ButtonImage.Width)
                         {
                             if (currentState.Y >= m_RestartButtonPosition.Y && currentState.Y <= m_RestartButtonPosition.Y + m_ButtonImage.Height)
@@ -388,6 +396,7 @@ namespace Puzzle_Hustle_Winter_Edition
 
                             }
                         }
+                        //if the resume button was pressed, go back to the Game scene
                         if (currentState.X >= m_ResumeButtonPosition.X && currentState.X <= m_ResumeButtonPosition.X + m_ButtonImage.Width)
                         {
                             if (currentState.Y >= m_ResumeButtonPosition.Y && currentState.Y <= m_ResumeButtonPosition.Y + m_ButtonImage.Height)
@@ -397,6 +406,7 @@ namespace Puzzle_Hustle_Winter_Edition
 
                             }
                         }
+                        //if the quit button was pressed, go to the Map Scene and play the music for that scene
                         if (currentState.X >= m_QuitButtonPosition.X && currentState.X <= m_QuitButtonPosition.X + m_ButtonImage.Width)
                         {
                             if (currentState.Y >= m_QuitButtonPosition.Y && currentState.Y <= m_QuitButtonPosition.Y + m_ButtonImage.Height)
@@ -409,7 +419,7 @@ namespace Puzzle_Hustle_Winter_Edition
                         break;
                 }
             }
-
+            // //if the current scene is the Game scene, call the Update fuctions that were created in the TileMap and the ScoreCalculator classes, for the current level
             if (m_SceneChanger.currentScene == SceneChanger.Scenes.Game)
             {
 
@@ -424,17 +434,22 @@ namespace Puzzle_Hustle_Winter_Edition
 
             
         }
+
+        //unlocks the next level by calling the UnlockLevel function from the MapLevel class
+        //the ScoreCalculator class is calling this function when the score is being displayed
         public void UnlockNextLevel()
         {
             m_Levels[m_SceneChanger.currentLevel].UnlockLevel();
         }
-
+        
+        //plays and loops the music from Game scene
         public void PuzzleBackgroundMusic()
         {
             MediaPlayer.Play(m_PuzzleMusic);
             MediaPlayer.IsRepeating = true;
         }
 
+        //plays and loops the music from Map scene
         private void MapSceneMusic()
         {
             MediaPlayer.Play(m_MenuMusic);
